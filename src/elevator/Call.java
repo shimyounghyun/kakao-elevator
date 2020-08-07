@@ -21,4 +21,14 @@ public class Call {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id:" + id +
+                ", timestamp:" + timestamp +
+                ", start:" + start +
+                ", end:" + end +
+                '}';
+    }
 }

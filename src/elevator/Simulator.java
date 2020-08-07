@@ -1,32 +1,32 @@
 package elevator;
 
-import org.json.JSONObject;
-
 import java.util.*;
 
 public class Simulator {
     public String token;
     public Api api;
-    public Map<Integer, Elevator> elevators;
+    public List<Elevator> elevators;
     public List<Call> calls;
+    public Response response;
 
-    public Simulator(int problem, String id){
-        init(problem, id);
+    public Simulator(int problem, String id, int count){
+        init(problem, id, count);
     }
 
-    public void init(int problem, String id){
+    public void init(int problem, String id, int count){
         this.api = Api.getInstance();
-        this.elevators = new HashMap<>();
-        this.calls = new LinkedList<>();
 
-//        JSONObject obj = api.start(id, problem, 4);
-//        this.token = obj.get("token").toString();
-
-
+        this.response = api.start(id, problem, count);
+        this.elevators = response.elevators;
+        this.calls = response.calls;
+        this.token = response.token;
     }
 
     public void start(){
-
+        System.out.println("### 시작 정보 : "+ response.toString());
+        while (response.is_end == false){
+            elevators.get(0);
+        }
     }
 
 
