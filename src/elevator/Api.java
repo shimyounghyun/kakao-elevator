@@ -19,25 +19,19 @@ public class Api {
     private String token = "";
     private final String HOST = "http://localhost:8000/";
 
-    public JSONObject start(String user, int problem, int count){
+    public Response start(String user, int problem, int count){
         String uri = HOST+"start/"+user+"/"+problem+"/"+count;
-        return parser.toJsonObject(httpConnection.con(uri, "POST"));
+        return parser.parse(httpConnection.con(uri, "POST"));
     }
 
-    public JSONObject oncalls(String token){
+    public Response oncalls(String token){
         String uri = HOST+"oncalls";
-        return parser.toJsonObject(httpConnection.con(uri, "GET", token));
+        return parser.parse(httpConnection.con(uri, "GET", token));
     }
 
-//    public JSONObject action(String token, String command){
-//        String uri = HOST+"action";
-//        return parser.toJsonObject(httpConnection.con(uri, "POST", token, command));
-//    }
-
-    public void action(String token, String command){
+    // start한 count와 command 엘레베이터 개수가 일치해야한다.
+    public Response action(String token, String command){
         String uri = HOST+"action";
-        System.out.println(
-                httpConnection.con(uri, "POST", token, command)
-        );
+        return parser.parse(httpConnection.con(uri, "POST", token, command));
     }
 }

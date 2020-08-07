@@ -93,7 +93,7 @@ public class HttpConnection {
             }
             br.close();
             result = response.toString();
-//            System.out.println(response.toString());
+            System.out.println(response.toString());
         } catch (Exception e) {
             System.out.println(e);
         }

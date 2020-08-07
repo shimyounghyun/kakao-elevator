@@ -9,8 +9,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Api api = Api.getInstance();
-        JSONObject a = api.start("tester",0,1);
-        api.oncalls(a.get("token").toString());
+        Response a = api.start("tester",0,2);
+        api.oncalls(a.token);
 
         Command command1 = new Command();
         command1.elevator_id = 0;
@@ -18,17 +18,16 @@ public class Main {
 //        command1.call_ids.add(0);
 //        command1.call_ids.add(1);
 
-//        Command command2 = new Command();
-//        command2.elevator_id = 1;
-//        command2.command = "STOP";
+        Command command2 = new Command();
+        command2.elevator_id = 1;
+        command2.command = "UP";
 
         ArrayList<JSONObject> list = new ArrayList<>();
         list.add(command1.toJsonObject());
-//        list.add(command2.toJsonObject());
+        list.add(command2.toJsonObject());
 
         JSONObject commands = new JSONObject();
         commands.put("commands",list);
-        System.out.println(a.get("token").toString()+" "+commands.toString());
-        api.action(a.get("token").toString(), commands.toString());
+        api.action(a.token, commands.toString());
     }
 }
